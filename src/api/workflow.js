@@ -7,3 +7,11 @@ export function queryWorkflow(data) {
     data
   })
 }
+
+export function deployWorkflow(data) {
+  return request({
+    url: '/models/deploy',
+    method: 'post',
+    data
+  })
+}

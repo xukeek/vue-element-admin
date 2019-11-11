@@ -17,6 +17,11 @@
           "name": "formKey",
           "isAttr": true,
           "type": "String"
+        },
+        {
+          "name": "candidateGroups",
+          "isAttr": true,
+          "type": "String"
         }
       ]
     }

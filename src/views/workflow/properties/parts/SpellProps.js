@@ -11,9 +11,13 @@ export default function(group, element) {
   if (is(element, 'bpmn:UserTask')) {
     group.entries.push(entryFactory.textField({
       id: 'from',
-      description: 'Choose form',
       label: 'Form key',
       modelProperty: 'formKey'
+    }))
+    group.entries.push(entryFactory.textField({
+      id: 'candidateGroups',
+      label: 'Candidate Groups',
+      modelProperty: 'candidateGroups'
     }))
   }
 }

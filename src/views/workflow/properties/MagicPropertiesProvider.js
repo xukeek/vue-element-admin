@@ -13,6 +13,8 @@ import nameProps from 'bpmn-js-properties-panel/lib/provider/bpmn/parts/NameProp
 
 // Require your custom property entries.
 import spellProps from './parts/SpellProps'
+import { is } from 'bpmn-js/lib/util/ModelUtil'
+import entryFactory from 'bpmn-js-properties-panel/lib/factory/EntryFactory'
 
 // The general tab contains all bpmn relevant properties.
 // The properties are organized in groups.
@@ -25,6 +27,14 @@ function createGeneralTabGroups(element, bpmnFactory, canvas, elementRegistry, t
   idProps(generalGroup, element, translate)
   nameProps(generalGroup, element, bpmnFactory, canvas, translate)
   processProps(generalGroup, element, translate)
+
+  if (is(element, 'bpmn:Process')) {
+    generalGroup.entries.push(entryFactory.checkbox({
+      id: 'isExecutable',
+      label: 'Executable',
+      modelProperty: 'isExecutable'
+    }))
+  }
 
   var detailsGroup = {
     id: 'details',
@@ -54,7 +64,7 @@ function createMagicTabGroups(element) {
   // Create a group called "Black Magic".
   var blackMagicGroup = {
     id: 'black-magic',
-    label: 'Form',
+    label: 'Props',
     entries: []
   }
 
@@ -80,8 +90,8 @@ export default function MagicPropertiesProvider(
 
     // The "magic" tab
     var magicTab = {
-      id: 'from',
-      label: 'Form',
+      id: 'prop',
+      label: 'Props',
       groups: createMagicTabGroups(element)
     }
 
