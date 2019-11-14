@@ -53,12 +53,14 @@ export default {
       this.modeler.on('import.done', function(event) {
         const error = event.error
         const warnings = event.warnings
-        self.$notify({
-          title: error ? 'Error' : 'Success',
-          message: warnings,
-          type: error ? 'error' : 'success',
-          duration: 2000
-        })
+        if (error) {
+          self.$notify({
+            title: 'Error',
+            message: warnings,
+            type: 'error',
+            duration: 2000
+          })
+        }
         self.modeler.get('canvas').zoom('fit-viewport')
       })
       this.modeler.importXML(diagramXML)

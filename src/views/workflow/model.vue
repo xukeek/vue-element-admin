@@ -14,19 +14,37 @@
     </div>
 
     <el-table
+      v-loading="listLoading"
       :data="list"
-      broder
+      border
+      fit
+      highlight-current-row
       style="width: 100%"
     >
       <el-table-column
-        prop="name"
-        label="名字"
+        prop="key"
+        label="模型标识"
       />
+      <el-table-column
+        prop="name"
+        label="模型名称"
+      />
+      <el-table-column
+        width="100"
+        label="版本"
+      >
+        <template slot-scope="{row}">
+          <el-tag>V{{ row.version }}</el-tag>
+        </template>
+      </el-table-column>
 
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
-            Edit
+            编辑
+          </el-button>
+          <el-button type="danger" size="mini" @click="handleUpdate(row)">
+            删除
           </el-button>
         </template>
       </el-table-column>
@@ -80,8 +98,9 @@ export default {
     async getList() {
       this.listLoading = true
       const res = await queryWorkflow(this.listQuery)
-      this.list = res.content
-      this.total = res.totalElements
+      const data = res.data
+      this.list = data.content
+      this.total = data.totalElements
       this.listLoading = false
     }
   }
