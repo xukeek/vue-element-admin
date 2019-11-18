@@ -103,4 +103,6 @@ export default function MagicPropertiesProvider(
   }
 }
 
+MagicPropertiesProvider.$inject = ['eventBus', 'bpmnFactory', 'canvas', 'elementRegistry', 'translate', 'propertiesOptions']
+
 inherits(MagicPropertiesProvider, PropertiesActivator)
