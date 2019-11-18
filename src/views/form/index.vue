@@ -10,7 +10,7 @@
       />
 
       <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
-      <el-button class="filter-item" type="primary" @click="handleFilter">新建</el-button>
+      <el-button class="filter-item" type="primary" @click="handleCreate">新建</el-button>
     </div>
 
     <el-table
@@ -26,7 +26,7 @@
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
-            Edit
+            编辑
           </el-button>
         </template>
       </el-table-column>
@@ -48,7 +48,7 @@ import permission from '@/directive/permission/index'
 import { queryForm } from '@/api/form'
 
 export default {
-  name: 'Form',
+  name: 'FormList',
   components: { Pagination },
   directives: { permission },
   data() {
@@ -77,9 +77,16 @@ export default {
     async getList() {
       this.listLoading = true
       const res = await queryForm(this.listQuery)
-      this.list = res.content
-      this.total = res.totalElements
+      const data = res.data
+      this.list = data.content
+      this.total = data.totalElements
       this.listLoading = false
+    },
+    handleCreate() {
+      this.$router.push({ path: '/form/create' })
+    },
+    handleUpdate(row) {
+      this.$router.push({ path: '/form/edit/' + row.id })
     }
   }
 }

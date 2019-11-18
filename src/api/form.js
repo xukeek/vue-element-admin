@@ -7,3 +7,11 @@ export function queryForm(data) {
     data
   })
 }
+
+export function saveForm(data) {
+  return request({
+    url: '/form',
+    method: 'post',
+    data
+  })
+}

@@ -40,6 +40,9 @@
 
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
+          <el-button type="primary" size="mini" @click="handleStart(row)">
+            启动
+          </el-button>
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
             编辑
           </el-button>
@@ -63,7 +66,7 @@
 import Pagination from '@/components/Pagination'
 import permission from '@/directive/permission/index'
 // import { deepClone } from '@/utils'
-import { queryWorkflow } from '@/api/workflow'
+import { queryWorkflow, startWorkflow } from '@/api/workflow'
 
 export default {
   name: 'Form',
@@ -102,6 +105,16 @@ export default {
       this.list = data.content
       this.total = data.totalElements
       this.listLoading = false
+    },
+    handleStart(row) {
+      startWorkflow(row.key).then(response => {
+        this.$notify({
+          title: '成功',
+          message: '保存成功',
+          type: 'success',
+          duration: 2000
+        })
+      })
     }
   }
 }

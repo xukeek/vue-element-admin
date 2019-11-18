@@ -12,6 +12,7 @@ import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
 import nestedRouter from './modules/nested'
 import workflowRouter from './modules/workflows'
+import formRouter from './modules/form'
 import taskRouter from './modules/tasks'
 
 /**
@@ -82,18 +83,6 @@ export const constantRoutes = [
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
         meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-      }
-    ]
-  },
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/form/index'),
-        name: 'FormBuilder',
-        meta: { title: '表单', icon: 'documentation', affix: true }
       }
     ]
   },
@@ -377,7 +366,7 @@ export const asyncRoutes = [
 ]
 
 export const customRoutes = [
-  taskRouter, workflowRouter
+  taskRouter, workflowRouter, formRouter
 ]
 
 const createRouter = () => new Router({
