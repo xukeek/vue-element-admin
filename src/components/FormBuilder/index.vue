@@ -46,7 +46,7 @@
     </el-row>
 
     <el-dialog
-      title="提示"
+      title="配置字段属性"
       :visible.sync="configDialogVisible"
       width="30%"
     >
@@ -124,6 +124,9 @@ export default {
           }
         }
         this.sortable_item.forEach((v, i) => {
+          v.obj.metadata.ignoreProperties.forEach((p) => {
+            delete v.model[p]
+          })
           formMetadata.properties['p' + i] = v.model
         })
         const postData = {

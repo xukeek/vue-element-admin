@@ -4,20 +4,27 @@ import {
   is
 } from 'bpmn-js/lib/util/ModelUtil'
 
-export default function(group, element) {
+export default function(group, element, bpmnFactory, canvas, elementRegistry, translate, propertiesOptions) {
   // Only return an entry, if the currently selected
   // element is a start event.
 
   if (is(element, 'bpmn:UserTask')) {
-    group.entries.push(entryFactory.textField({
-      id: 'from',
-      label: 'Form key',
-      modelProperty: 'formKey'
+    group.entries.push(entryFactory.selectBox({
+      id: 'form',
+      label: translate('Form'),
+      selectOptions: propertiesOptions('form'),
+      modelProperty: 'formKey',
+      emptyParameter: false
     }))
-    group.entries.push(entryFactory.textField({
+
+    group.entries.push(entryFactory.selectBox({
       id: 'candidateGroups',
-      label: 'Candidate Groups',
-      modelProperty: 'candidateGroups'
+      label: translate('Candidate Groups'),
+      selectOptions: [
+        { value: 'admin', name: 'Admin' }
+      ],
+      modelProperty: 'candidateGroups',
+      emptyParameter: false
     }))
   }
 }

@@ -34,7 +34,7 @@ export const inputConf = {
     properties: {
       type: {
         type: 'string',
-        defaultValue: 'string',
+        default: 'string',
         ui: {
           hidden: true
         }
@@ -44,7 +44,7 @@ export const inputConf = {
         ui: {
           hidden: true
         },
-        defaultValue: {
+        default: {
           label: 'Label'
         },
         valueTemplate: function(formData, constData, selfData) {
@@ -58,7 +58,7 @@ export const inputConf = {
         ui: {
           hidden: true
         },
-        defaultValue: {
+        default: {
           required: {
             value: false,
             errMsg: '必填!'
@@ -89,7 +89,7 @@ export const inputConf = {
       },
       required: {
         type: 'boolean',
-        defaultValue: false,
+        default: false,
         ui: {
           'label': '必填'
         }

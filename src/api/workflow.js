@@ -30,3 +30,19 @@ export function queryWorkflowInstance(data) {
     data
   })
 }
+
+export function queryTasks(data) {
+  return request({
+    url: '/workflow/tasks',
+    method: 'post',
+    data
+  })
+}
+
+export function saveTaskForm(taskId, data) {
+  return request({
+    url: '/workflow/tasks/' + taskId + '/form',
+    method: 'post',
+    data
+  })
+}

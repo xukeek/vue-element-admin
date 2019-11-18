@@ -5,7 +5,7 @@ import Layout from '@/layout'
 const taskRouter = {
   path: '/task',
   component: Layout,
-  redirect: '/task/start',
+  redirect: '/task/todo',
   alwaysShow: true, // will always show the root menu
   name: 'task',
   meta: {
@@ -14,24 +14,24 @@ const taskRouter = {
     roles: ['admin', 'editor'] // you can set roles in root nav
   },
   children: [
-    {
-      path: 'start',
-      component: () => import('@/views/task/start'),
-      name: 'TaskStart',
-      meta: {
-        title: '发起事务',
-        roles: ['admin', 'editor'] // or you can only set roles in sub nav
-      }
-    },
-    {
-      path: 'claim',
-      component: () => import('@/views/task/claim'),
-      name: 'TaskClaim',
-      meta: {
-        title: '待签事务',
-        roles: ['admin', 'editor']
-      }
-    },
+    // {
+    //   path: 'start',
+    //   component: () => import('@/views/task/start'),
+    //   name: 'TaskStart',
+    //   meta: {
+    //     title: '发起事务',
+    //     roles: ['admin', 'editor'] // or you can only set roles in sub nav
+    //   }
+    // },
+    // {
+    //   path: 'claim',
+    //   component: () => import('@/views/task/claim'),
+    //   name: 'TaskClaim',
+    //   meta: {
+    //     title: '待签事务',
+    //     roles: ['admin', 'editor']
+    //   }
+    // },
     {
       path: 'todo',
       component: () => import('@/views/task/todo'),

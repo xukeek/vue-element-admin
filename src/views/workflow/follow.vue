@@ -21,21 +21,22 @@
       style="width: 100%"
     >
       <el-table-column
-        prop="key"
+        prop="processDefinitionKey"
         label="模型标识"
       />
       <el-table-column
-        prop="name"
+        prop="processDefinitionName"
         label="模型名称"
       />
-      <el-table-column
-        width="100"
-        label="版本"
-      >
+      <el-table-column>
         <template slot-scope="{row}">
-          <el-tag>V{{ row.version }}</el-tag>
+          <img :src="'/api/workflow/instance/diagram/' + row.id" width="40" height="40" class="head_pic"/>
         </template>
       </el-table-column>
+      <el-table-column
+        width="100"
+        label="startTime"
+      />
 
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row}">

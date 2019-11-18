@@ -17,14 +17,30 @@ import diagramXML from 'raw-loader!./newDiagram.bpmn'
 import propertiesProviderModule from './properties'
 import magicModdleDescriptor from './properties/descriptors/magic'
 import { deployWorkflow } from '@/api/workflow'
+import { queryForm } from '@/api/form'
 
 export default {
   name: 'WorkflowCreate',
   data() {
     return {
       modeler: undefined,
-      content: undefined
+      content: undefined,
+      forms: []
     }
+  },
+  created() {
+    queryForm({
+      name: undefined,
+      page: 1,
+      size: 30,
+      deleted: false,
+      tags: [],
+      orderBy: null
+    }).then(response => {
+      this.forms = response.data.content.map(a => {
+        return { value: a.id, name: a.name }
+      })
+    })
   },
   mounted: function() {
     this.initModeler()
@@ -34,12 +50,22 @@ export default {
   },
   methods: {
     initModeler() {
+      const that = this
+      function propertiesOptions(type) {
+        if (type === 'form') {
+          return that.$data.forms
+        }
+      }
+
       const container = this.$refs.canvas
       const properties = this.$refs.properties
       this.modeler = new BpmnModeler({
         additionalModules: [
           propertiesPanelModule,
-          propertiesProviderModule
+          propertiesProviderModule,
+          {
+            propertiesOptions: ['value', propertiesOptions]
+          }
         ],
         container: container,
         propertiesPanel: {
